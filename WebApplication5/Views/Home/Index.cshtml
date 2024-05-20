@@ -1,0 +1,135 @@
+﻿@model WebApplication5.Models.User
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sufee Admin - HTML5 Admin Template</title>
+    <meta name="description" content="Sufee Admin - HTML5 Admin Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="~/Assets/vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Assets/vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Assets/vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Assets/vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="~/Assets/vendors/selectFX/css/cs-skin-elastic.css">
+
+    <link rel="stylesheet" href="~/Assets/assets/css/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+
+    <style>
+        /* Custom styles for the form */
+        body {
+            background: url('@Url.Content("~/Assets/images/background.jpg")') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: auto;
+            margin-top: 100px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+            .form-container h4 {
+                margin-bottom: 20px;
+                text-align: center;
+                font-weight: 700;
+            }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border-radius: 5px;
+        }
+
+        .btn-default {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+            .btn-default:hover {
+                background-color: #0056b3;
+            }
+    </style>
+
+</head>
+
+<body>
+    <center><h1 style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Welcome To LMS</h1></center><br />
+    <center><h2 style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">Project For DBMS</h2></center><br />
+    <center><h2 style="color: white; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);">By Azlan Ali & Faseeh</h2></center>
+
+    <div class="container">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                <div class="form-container">
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <h4>Please Login</h4>
+                        <center>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" value="Login" class="btn btn-default btn-block" />
+                            </div>
+                        </center>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Assets/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="~/Assets/vendors/popper.js/dist/umd/popper.min.js"></script>
+    <script src="~/Assets/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/Assets/assets/js/main.js"></script>
+
+</body>
+
+</html>

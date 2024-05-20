@@ -1,0 +1,41 @@
+﻿@model List<WebApplication5.Models.GradeHistoryViewModel>
+
+@{
+    ViewBag.Title = "Grade History";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<h2 class="text-center">Grade History</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Total Marks</th>
+                        <th>Grade</th>
+                        <th>CGPA</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ClassName</td>
+                            <td>@item.Marks</td>
+                            <td>@item.Grade</td>
+                            <td>@item.CGPA</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@if (ViewBag.TotalCGPA != null)
+{
+    <h3 class="text-center">Total CGPA: @ViewBag.TotalCGPA</h3>
+}

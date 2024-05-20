@@ -1,0 +1,37 @@
+﻿@model List<WebApplication5.Models.FacultyClassViewModel>
+
+@{
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<h2 class="text-center">Faculty Classes</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Class ID</th>
+                        <th>Class Day</th>
+                        <th>Class Session</th>
+                        <th>Course Name</th>
+                        <th>Number of Students Enrolled</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var facultyClass in Model)
+                    {
+                        <tr>
+                            <td>@facultyClass.Class.ClassId</td>
+                            <td>@facultyClass.Class.ClassDay</td>
+                            <td>@facultyClass.Class.ClassSession</td>
+                            <td>@(facultyClass.Class.Subject != null ? facultyClass.Class.Subject.CourseName : "No Course")</td>
+                            <td>@facultyClass.NumberOfUsersEnrolled</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

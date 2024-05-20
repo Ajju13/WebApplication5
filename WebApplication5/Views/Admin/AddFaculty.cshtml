@@ -1,0 +1,79 @@
+﻿@model WebApplication5.Models.Faculty
+
+@{
+    ViewBag.Title = "AddStudent";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<h2>Add Faculty</h2>
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.SuccessMessage
+    </div>
+}
+
+@using (Html.BeginForm("AddFaculty", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <h4>Student Details</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        Faculty ID:
+                        @Html.EditorFor(model => model.FacultyId, new { htmlAttributes = new { @class = "form-control", placeholder = "Student ID" } })
+                        @Html.ValidationMessageFor(model => model.FacultyId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        Faculty Email:
+                        @Html.EditorFor(model => model.FacultyEmail, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                        @Html.ValidationMessageFor(model => model.FacultyEmail, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        Faculty Phone:
+                        @Html.EditorFor(model => model.FacultyPhone, new { htmlAttributes = new { @class = "form-control", placeholder = "Phone" } })
+                        @Html.ValidationMessageFor(model => model.FacultyPhone, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        Faculty Name:
+                        @Html.EditorFor(model => model.FacultyName, new { htmlAttributes = new { @class = "form-control", placeholder = "Name" } })
+                        @Html.ValidationMessageFor(model => model.FacultyName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        Faculty Address:
+                        @Html.EditorFor(model => model.FacultyAddress, new { htmlAttributes = new { @class = "form-control", placeholder = "Address" } })
+                        @Html.ValidationMessageFor(model => model.FacultyAddress, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        Faculty Image:
+                        <div class="input-group">
+                            <input type="file" name="imgfile" id="imgfile" class="form-control" onchange="displaySelectedFileName(this)" />
+                        </div>
+                        <input type="text" class="form-control" id="selectedFileName" readonly placeholder="No file chosen" />
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="text-center mt-3">
+    @Html.ActionLink("Back to List", "ViewFaculty", null, new { @class = "btn btn-secondary" })
+</div>

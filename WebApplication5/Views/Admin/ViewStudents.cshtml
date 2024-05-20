@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebApplication5.Models.Student>
+
+@{
+    ViewBag.Title = "View All Students";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<center>
+    <h2>All Students</h2>
+    <br />
+    <p>
+        @Html.ActionLink("Add New Student", "AddStudent", null, new { @class = "btn btn-primary" })
+    </p>
+</center>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Student ID</th>
+                <th>Student Email</th>
+                <th>Phone</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.StudentId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StudentEmail)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StudentPhone)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StudentName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StudentAddress)</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.StudentImage))
+                        {
+                            <img src="@Url.Content(item.StudentImage)" alt="Student Image" style="width: 50px; height: 50px;" />
+                        }
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Actions">
+                            @Html.ActionLink("Edit", "EditStudent", new { id = item.StudentId }, new { @class = "btn btn-primary mr-2" })
+                            @using (Html.BeginForm("DeleteStudent", "Admin", FormMethod.Post))
+                            {
+                                @Html.Hidden("id", item.StudentId)
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

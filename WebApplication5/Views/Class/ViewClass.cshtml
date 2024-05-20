@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApplication5.Models.Class>
+
+@{
+    ViewBag.Title = "ViewClass";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+<center>
+    <h2 class="text-center">View Classes</h2>
+    <br />
+    <div class="text-center mb-3">
+        @Html.ActionLink("Add New Class", "AddClass", null, new { @class = "btn btn-primary" })
+    </div>
+</center>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>Class ID</th>
+                <th>Class Day</th>
+                <th>Class Session</th>
+                <th>Course</th>
+                <th>Faculty Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.ClassId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ClassDay)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ClassSession)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Subject.CourseName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Faculty.FacultyEmail)</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

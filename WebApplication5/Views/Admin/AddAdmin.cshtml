@@ -1,0 +1,83 @@
+﻿@model WebApplication5.Models.Staff
+
+@{
+    ViewBag.Title = "Add Staff";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<center>
+    <h2>Add Staff</h2>
+</center>
+
+@if (ViewBag.SuccessMessage != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.SuccessMessage
+    </div>
+}
+
+@using (Html.BeginForm("AddAdmin", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <h4>Staff Details</h4>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        Staff ID:
+                        @Html.EditorFor(model => model.StaffId, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StaffId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        Staff Email:
+                        @Html.EditorFor(model => model.StaffEmail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StaffEmail, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        Staff Phone:
+                        @Html.EditorFor(model => model.StaffPhone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StaffPhone, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        Staff Name:
+                        @Html.EditorFor(model => model.StaffName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StaffName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        Staff Address:
+                        @Html.EditorFor(model => model.StaffAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StaffAddress, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        Staff Image:
+                        <div class="input-group">
+                            <input type="file" name="imgfile" id="imgfile" class="form-control" onchange="displaySelectedFileName(this)" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button" onclick="$('#StaffImage').click()">Upload</button>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control" id="selectedFileName" readonly placeholder="No file chosen" />
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="text-center">
+    @Html.ActionLink("Staff List", "ViewAdmin", null, new { @class = "btn btn-secondary" })
+</div>

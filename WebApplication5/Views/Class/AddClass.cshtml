@@ -1,0 +1,69 @@
+﻿@model WebApplication5.Models.Class
+
+@{
+    ViewBag.Title = "AddClass";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+<center>
+    <h2>Add Class</h2>
+</center>
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-container">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CourseId, "Course", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownList("CourseId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CourseId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FacultyId, "Teacher", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownList("FacultyId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FacultyId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ClassId, "Class ID", htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.ClassId, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.ClassId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ClassDay, "Class Day", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.ClassDay, new SelectList(Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().Where(d => d != DayOfWeek.Saturday && d != DayOfWeek.Sunday)), "Select", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ClassDay, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ClassSession, "Class Session", htmlAttributes: new { @class = "control-label" })
+                        @Html.DropDownListFor(model => model.ClassSession, new SelectList(new List<string> { "1", "2" }), "Select", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ClassSession, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="text-center">
+    @Html.ActionLink("Class List", "ViewClass", null, new { @class = "btn btn-secondary mt-3" })
+</div>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<WebApplication5.Models.Faculty>
+
+@{
+    ViewBag.Title = "View All Faculty";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+<center>
+    <h2>View All Faculty</h2>
+</center>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Image</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.FacultyId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FacultyEmail)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FacultyPhone)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FacultyName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.FacultyAddress)</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.FacultyImage))
+                        {
+                            <img src="@Url.Content(item.FacultyImage)" alt="Faculty Image" style="width: 50px; height: 50px;" />
+                        }
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            @Html.ActionLink("Edit", "EditFaculty", new { id = item.FacultyId }, new { @class = "btn btn-primary btn-sm" })
+                            <span class="mx-1"></span> <!-- Add some gap between buttons -->
+                            @using (Html.BeginForm("DeleteFaculty", "Admin", FormMethod.Post, new { onsubmit = "return confirm('Are you sure you want to delete this faculty member?');" }))
+                            {
+                                @Html.Hidden("id", item.FacultyId)
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

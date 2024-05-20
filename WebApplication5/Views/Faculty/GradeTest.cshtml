@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Grade Test";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<h2 class="text-center">Grade Test</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            @using (Html.BeginForm("GradeTest", "Faculty", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-group">
+                    @Html.Label("Select Class", htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownList("selectedClassId", ViewBag.Classes as SelectList, "Select a class", new { @class = "form-control" })
+                </div>
+
+                <div class="text-center">
+                    <input type="submit" value="Select Class" class="btn btn-primary" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

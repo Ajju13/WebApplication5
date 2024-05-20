@@ -1,0 +1,36 @@
+﻿@model List<WebApplication5.Models.Subject>
+@{
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<h2 class="text-center">Your Schedule</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Class Session</th>
+                        <th>Day</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model)
+                    {
+                        var uniqueClassSessions = course.Classes.Select(c => c.ClassSession).Distinct();
+                        foreach (var classSession in uniqueClassSessions)
+                        {
+                            <tr>
+                                <td>@course.CourseName</td>
+                                <td>@classSession</td>
+                                <td>@course.Classes.First(c => c.ClassSession == classSession).ClassDay</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

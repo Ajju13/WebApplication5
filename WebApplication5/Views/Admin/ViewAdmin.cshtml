@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebApplication5.Models.Staff>
+
+@{
+    ViewBag.Title = "View Staff";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<center>
+    <h2>View Staff</h2>
+</center>
+<br />
+<center>
+    <p>
+        @Html.ActionLink("Add New Staff", "AddAdmin", null, new { @class = "btn btn-primary" })
+    </p><br />
+</center>
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Staff ID</th>
+                <th>Staff Email</th>
+                <th>Phone</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.StaffId)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StaffEmail)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StaffPhone)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StaffName)</td>
+                    <td>@Html.DisplayFor(modelItem => item.StaffAddress)</td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.StaffImage))
+                        {
+                            <img src="@Url.Content(item.StaffImage)" alt="Staff Image" style="width: 50px; height: 50px;" />
+                        }
+                    </td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            @Html.ActionLink("Edit", "EditAdmin", new { id = item.StaffId }, new { @class = "btn btn-primary btn-sm" })
+                            <span class="mx-1"></span> <!-- Add some gap between buttons -->
+                            @using (Html.BeginForm("DeleteAdmin", "Admin", FormMethod.Post, new { onsubmit = "return confirm('Are you sure you want to delete this staff member?');" }))
+                            {
+                                @Html.Hidden("id", item.StaffId)
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

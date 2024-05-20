@@ -1,0 +1,103 @@
+﻿@model WebApplication5.Models.Faculty
+
+@{
+    ViewBag.Title = "Faculty Dashboard";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+
+
+<div class="container mt-4">
+    <!-- Student Profile Section -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title mb-3">Faculty Portal</strong>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="text-left mr-3">
+                            <h5 class="mt-2 mb-1">Faculty ID: @Model.FacultyId</h5> <!-- Display Student ID -->
+                            <h5 class="mt-2 mb-1">Faculty Name: @Model.FacultyName</h5>
+                            <h5 class="mt-2 mb-1">Phone: @Model.FacultyPhone</h5>
+                        </div>
+                        <div class="mx-auto d-block">
+                            @if (!string.IsNullOrEmpty(Model.FacultyImage))
+                            {
+                                <img src="@Url.Content(Model.FacultyImage)" alt="Faculty Image" style="width: 100px; height: 100px; border-radius: 50%;" />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Widgets Section -->
+<div class="row justify-content-center mb-4">
+    <!-- Assignment Section -->
+    <div class="col-md-4">
+        <div class="card h-100 d-flex flex-column">
+            <div class="card-body">
+                <div class="stat-widget-one">
+                    <a href="~/Assets/assignment.png">
+                        <img class="stat-icon dib" src="~/Assets/assignment.png" alt="Assignment Icon" style="width: 50px; height: 50px;">
+                    </a>
+                    <div class="stat-content dib">
+                        <div class="stat-text">Your Total Classes</div>
+                        <div class="stat-digit">@ViewBag.TotalClasses</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Fee Section -->
+    <div class="col-md-4">
+        <div class="card h-100 d-flex flex-column">
+            <div class="card-body">
+                <div class="stat-widget-one">
+                    <div class="stat-icon dib"><i class="ti-money text-success border-success"></i></div>
+                    <div class="stat-content dib">
+                        <div class="stat-text">Total Salary</div>
+                        <div class="stat-text">Salary Module Coming Soon</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <!-- First Line of Buttons -->
+        <div class="col-md-3 d-flex flex-column">
+            @Html.ActionLink("Your Classes", "FacultyClasses", "Faculty", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("View Schedule", "FacultySchedule", "Faculty", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("View Test Types", "ViewAllTestTypes", "Faculty", null, new { @class = "btn btn-primary btn-lg mb-3" })
+        </div>
+
+        <!-- Second Line of Buttons -->
+        <div class="col-md-3 d-flex flex-column">
+            @Html.ActionLink("Add Test", "AddTest", "Faculty", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("View All Test", "ViewAllTest", "Faculty", null, new { @class = "btn btn-primary btn-lg mb-3" })
+        </div>
+
+        <!-- Third Line of Buttons -->
+        <div class="col-md-3 d-flex flex-column">
+            @Html.ActionLink("Add Student Marks", "GradeTest", "Faculty", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("Update Student Marks", "ViewTestResult", "Faculty", null, new { @class = "btn btn-primary btn-lg mb-3" })
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-primary {
+        width: 100%;
+    }
+</style>
+

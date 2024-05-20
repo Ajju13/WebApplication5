@@ -1,0 +1,42 @@
+﻿@model List<WebApplication5.Models.TestViewModel>
+
+@{
+    ViewBag.Title = "StudentMain";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<div class="container">
+    <h2 class="text-center">Upcoming Tests</h2>
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Course Name</th>
+                    <th>Test Type</th>
+                    <th>Test Date</th>
+                    <th>Remaining Time</th>
+                    <th>Max Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var test in Model)
+                {
+                    <tr>
+                        <td>@test.CourseName</td>
+                        <td>@test.TestType</td>
+                        <td>@DateTime.Parse(test.TestDate).ToShortDateString()</td>
+                        <td>@test.RemainingTime</td>
+                        <td>@test.MaxMarks</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            No tests available for the respective student.
+        </div>
+    }
+</div>

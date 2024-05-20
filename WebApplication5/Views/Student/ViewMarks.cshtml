@@ -1,0 +1,36 @@
+﻿@model List<WebApplication5.Models.MarkViewModel>
+
+@{
+    ViewBag.Title = "StudentMain";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<div class="container">
+    <h2 class="text-center">Marks</h2>
+    @if (Model != null && Model.Any())
+    {
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Course Name</th>
+                    <th>Max Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var mark in Model)
+                {
+                    <tr>
+                        <td>@mark.ClassName</td>
+                        <td>@mark.Marks</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">
+            No marks available for the respective student.
+        </div>
+    }
+</div>

@@ -1,0 +1,126 @@
+﻿@model WebApplication5.Models.Staff
+
+
+@{
+    ViewBag.Title = "Staff Dashboard";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+
+<div class="container mt-4">
+    <!-- Student Profile Section -->
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <strong class="card-title mb-3">Staff Portal</strong>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex">
+                        <div class="text-left mr-3">
+                            <h5 class="mt-2 mb-1">Staff ID: @Model.StaffId</h5> <!-- Display Student ID -->
+                            <h5 class="mt-2 mb-1">Staff Name: @Model.StaffName</h5>
+                            <h5 class="mt-2 mb-1">Phone: @Model.StaffPhone</h5>
+                        </div>
+                        <div class="mx-auto d-block">
+                            @if (!string.IsNullOrEmpty(Model.StaffImage))
+                            {
+                                <img src="@Url.Content(Model.StaffImage)" alt="Student Image" style="width: 100px; height: 100px; border-radius: 50%;" />
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Widgets Section -->
+<div class="row justify-content-center mb-4">
+    <!-- Student Section -->
+    <div class="col-md-4">
+        <div class="card h-100 d-flex flex-column">
+            <div class="card-body">
+                <div class="stat-widget-one">
+                    <div class="stat-icon dib">
+                        <i class="ti-user text-muted"></i>
+                    </div>
+                    <div class="stat-content dib">
+                        <div class="stat-text">Total Students</div>
+                        <div class="stat-digit">@ViewBag.TotalStudents</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Section -->
+    <div class="col-md-4">
+        <div class="card h-100 d-flex flex-column">
+            <div class="card-body">
+                <div class="stat-widget-one">
+                    <div class="stat-icon dib">
+                        <i class="ti-user text-muted"></i>
+                    </div>
+                    <div class="stat-content dib">
+                        <div class="stat-text">Total Users</div>
+                        <div class="stat-digit">@ViewBag.TotalUsers</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Class Section -->
+    <div class="col-md-4">
+        <div class="card h-100 d-flex flex-column">
+            <div class="card-body">
+                <div class="stat-widget-one">
+                    <div class="stat-icon dib">
+                        <i class="ti-book text-muted"></i>
+                    </div>
+                    <div class="stat-content dib">
+                        <div class="stat-text">Total Classes</div>
+                        <div class="stat-digit">@ViewBag.TotalClasses</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <!-- First Line of Buttons -->
+        <div class="col-md-3 d-flex flex-column">
+            @Html.ActionLink("Add New User", "AddUser", "Admin", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("View All Users", "ViewUser", "Admin", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("Add New Student", "AddStudent", "Admin", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("View All Students", "ViewStudents", "Admin", null, new { @class = "btn btn-primary btn-lg mb-3" })
+        </div>
+
+        <!-- Second Line of Buttons -->
+        <div class="col-md-3 d-flex flex-column">
+            @Html.ActionLink("Add New Faculty", "AddFaculty", "Admin", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("View All Faculty", "ViewFaculty", "Admin", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("Add New Staff", "AddAdmin", "Admin", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("View All Staffs", "ViewAdmin", "Admin", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("Course Enrollment", "CourseSelection", "Class", null, new { @class = "btn btn-primary btn-lg mb-3" })
+        </div>
+
+        <!-- Third Line of Buttons -->
+        <div class="col-md-3 d-flex flex-column">
+            @Html.ActionLink("Add New Course", "AddCourse", "Course", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("View All Course", "ViewCourse", "Course", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("Add New Class", "AddClass", "Class", null, new { @class = "btn btn-primary btn-lg mb-3" })
+            @Html.ActionLink("View All Class", "ViewClass", "Class", null, new { @class = "btn btn-primary btn-lg mb-3" })
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .btn-primary {
+        width: 100%;
+    }
+</style>

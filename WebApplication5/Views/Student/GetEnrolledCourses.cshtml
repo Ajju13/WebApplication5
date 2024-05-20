@@ -1,0 +1,37 @@
+﻿@model List<WebApplication5.Models.Subject>
+@{
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<h2 class="text-center">Your Enrolled Courses</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Class Session</th>
+                        <th>Day</th>
+                        <th>Faculty</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var course in Model)
+                    {
+                        foreach (var courseClass in course.Classes)
+                        {
+                            <tr>
+                                <td>@course.CourseName</td>
+                                <td>@courseClass.ClassSession</td>
+                                <td>@courseClass.ClassDay</td>
+                                <td>@courseClass.Faculty.FacultyName</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

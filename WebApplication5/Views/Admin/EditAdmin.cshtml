@@ -1,0 +1,73 @@
+﻿@model WebApplication5.Models.Staff
+@{
+    ViewBag.Title = "Edit Staff";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+<center>
+    <h2>Edit Staff Information</h2>
+</center>
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@using (Html.BeginForm("EditAdmin", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="form-container">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.StaffId)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StaffEmail, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.StaffEmail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StaffEmail, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StaffName, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.StaffName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StaffName, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StaffAddress, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.StaffAddress, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StaffAddress, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StaffPhone, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.StaffPhone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.StaffPhone, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="text-center">
+    @Html.ActionLink("All Staff List", "ViewAdmin", null, new { @class = "btn btn-secondary mt-3" })
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

@@ -1,0 +1,55 @@
+﻿@model WebApplication5.Models.RegisterClassesViewModel
+
+@{
+    ViewBag.Title = "Register Classes";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<style>
+    .course-item {
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Student Registration</h2>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("RegisterClasses", "Student", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div id="availableClassesBox" class="class-box">
+                            <h3 class="text-center">Available Classes</h3>
+                            @for (int i = 0; i < Model.AvailableClasses.Count; i++)
+                            {
+                                <div class="course-item text-center">
+                                    @Html.HiddenFor(m => m.AvailableClasses[i].ClassId)
+                                    @Html.CheckBoxFor(m => m.AvailableClasses[i].Selected, new { @class = "form-check-input" })
+                                    @Html.LabelFor(m => m.AvailableClasses[i].Selected, "Course Name: " + Model.AvailableClasses[i].CourseName + " (Class Day: " + Model.AvailableClasses[i].ClassDay + ", Class Schedule: " + Model.AvailableClasses[i].ClassSchedule + ")", new { @class = "form-check-label" })
+                                </div>
+                            }
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<WebApplication5.Models.ClassTestViewModel>
+
+@{
+    ViewBag.Title = "View All Tests";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<h2 class="text-center">View All Tests</h2>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Test ID</th>
+                        <th>Course Name</th>
+                        <th>Class Session</th>
+                        <th>Test Type</th>
+                        <th>Test Date</th>
+                        <th>Max Marks</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var test in Model)
+                    {
+                        <tr>
+                            <td>@test.CT_id</td>
+                            <td>@test.CourseName</td>
+                            <td>@test.ClassSession</td>
+                            <td>@test.TestTypeName</td>
+                            <td>@test.TestDate</td>
+                            <td>@test.MaxMarks</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
